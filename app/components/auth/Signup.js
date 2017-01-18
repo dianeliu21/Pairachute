@@ -21,9 +21,8 @@ export class Signup extends Component {
   }
 
   async signup(email, password) {
-    
     try{
-      await firebase.auth().createUserWithEmailAndPassword(email, password);
+      // await firebase.auth().createUserWithEmailAndPassword(email, password);
       console.log("Account created");
       // Navigate to new user flow
 

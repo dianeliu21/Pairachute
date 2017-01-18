@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {Text} from 'react-native';
 const styles = require('../../styles/styles.js');
 
-class HomeScreen extends Component {
+class Home extends Component {
   render() {
     return(
       <Text style={styles.authTitle}>Pairachute</Text>
@@ -10,4 +10,4 @@ class HomeScreen extends Component {
   }
 }
 
-module.exports = HomeScreen
+module.exports = Home

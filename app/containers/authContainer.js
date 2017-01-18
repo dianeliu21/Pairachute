@@ -1,4 +1,11 @@
 import React, { Component } from 'react';
+import { Actions } from 'react-native-router-flux';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import * as firebase from 'firebase';
+import {ActionCreators} from '../../actions';
+import Signup from './Signup';
+const styles = require("../../styles/styles.js");
 import {
   Button,
   Navigator,
@@ -7,10 +14,8 @@ import {
   TouchableHighlight,
   View,
 } from 'react-native';
-import Signup from './Signup';
-const styles = require("../../styles/styles.js");
 
-export class Auth extends Component {
+class Login extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -23,40 +28,33 @@ export class Auth extends Component {
     try{
       await firebase.auth().signInWithEmailAndPassword(email, password);
       console.log("Logged in!");
-      _navigate('HomeScreen');
+      // Actions.home;
     } catch(error) {
-      console.log(error.toString());
+      console.log("Login error: " + error.toString());
     }
   }
 
-  signup() {
-    // Navigate to sign up screen
-  }
-
-  _navigate(title) {
-    this.props.navigator.push({
-      name: title,
-    })
-  }
 
   render() {
     return(
       <View style={styles.container}>
         <Text style={styles.authTitle}>Pairachute</Text>
         <TextInput
+          onChangeText={(email) => this.setState({email})}
           placeholder="Email Address"
           style={styles.authInput}
         />
         <TextInput
+          onChangeText={(password) => this.setState({password})}
           placeholder="Password"
           style={styles.authInput}
         />
         <Button
-          onPress={() => this._navigate('HomeScreen')}
+          onPress={() => this.login(this.state.email, this.state.password)}
           title="Log In"
         />
         <Button
-          onPress={() => this._navigate('Signup')}
+          onPress={Actions.signup}
           title="Don't have an account? Sign up"
         />
       </View>
@@ -64,4 +62,8 @@ export class Auth extends Component {
   }
 }
 
-module.exports = Auth
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators(ActionCreators, dispatch);
+}
+
+export default connect(() => { return {} }, mapDispatchToProps)(Login);
