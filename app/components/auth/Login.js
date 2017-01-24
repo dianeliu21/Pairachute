@@ -22,11 +22,6 @@ class Login extends Component {
     }
   }
 
-  login() {
-    this.props.login();
-  }
-
-
   render() {
     return(
       <View style={styles.container}>
@@ -43,7 +38,7 @@ class Login extends Component {
           style={styles.authInput}
         />
         <Button
-          onPress={() => this.login()}
+          onPress={() => this.props.login()}
           title="Log In"
         />
         <Button

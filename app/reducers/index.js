@@ -4,5 +4,4 @@ import routes from './routes';
 
 export default combineReducers(Object.assign(
   authReducers,
-  // routes,
 ));
