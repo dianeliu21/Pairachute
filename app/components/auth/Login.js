@@ -1,10 +1,8 @@
 import React, { Component } from 'react';
 import { Actions } from 'react-native-router-flux';
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
 import * as firebase from 'firebase';
-import {ActionCreators} from '../../actions';
-import Signup from './Signup';
+
+// import Signup from './Signup';
 const styles = require("../../styles/styles.js");
 import {
   Button,
@@ -24,16 +22,6 @@ class Login extends Component {
     }
   }
 
-  // async login(email, password) {
-  //   try{
-  //     await firebase.auth().signInWithEmailAndPassword(email, password);
-  //     console.log("Logged in!");
-  //     // Actions.home;
-  //   } catch(error) {
-  //     console.log("Login error: " + error.toString());
-  //   }
-  // }
-
   login() {
     this.props.login();
   }
@@ -51,6 +39,7 @@ class Login extends Component {
         <TextInput
           onChangeText={(password) => this.setState({password})}
           placeholder="Password"
+          secureTextEntry=true
           style={styles.authInput}
         />
         <Button
@@ -66,8 +55,4 @@ class Login extends Component {
   }
 }
 
-function mapDispatchToProps(dispatch) {
-  return bindActionCreators(ActionCreators, dispatch);
-}
-
-export default connect(() => { return {} }, mapDispatchToProps)(Login);
+module.exports = Login
