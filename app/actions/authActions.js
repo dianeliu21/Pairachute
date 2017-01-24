@@ -1,7 +1,7 @@
 import * as types from './actionTypes';
 import fb from '../config/initializeFirebase';
 
-function login(email, password) {
+export function login(email, password) {
   return function (dispatch) {
     dispatch(loginAttempt());
     return fb.auth().signInWithEmailAndPassword(email, password)

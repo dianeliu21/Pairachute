@@ -1,15 +1,11 @@
 import React, { Component } from 'react';
 import { Actions } from 'react-native-router-flux';
-import * as firebase from 'firebase';
-
-// import Signup from './Signup';
 const styles = require("../../styles/styles.js");
 import {
   Button,
   Navigator,
   Text,
   TextInput,
-  TouchableHighlight,
   View,
 } from 'react-native';
 
@@ -20,12 +16,14 @@ class Login extends Component {
       email: '',
       password: '',
     }
+    // console.log(this.props)
   }
 
   render() {
     return(
       <View style={styles.container}>
         <Text style={styles.authTitle}>Pairachute</Text>
+        <Text>{this.props.authErrorMessage}</Text>
         <TextInput
           onChangeText={(email) => this.setState({email})}
           placeholder="Email Address"
@@ -38,7 +36,7 @@ class Login extends Component {
           style={styles.authInput}
         />
         <Button
-          onPress={() => this.props.login()}
+          onPress={() => this.props.login(this.state.email, this.state.password)}
           title="Log In"
         />
         <Button
