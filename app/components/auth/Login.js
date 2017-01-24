@@ -39,7 +39,7 @@ class Login extends Component {
         <TextInput
           onChangeText={(password) => this.setState({password})}
           placeholder="Password"
-          secureTextEntry=true
+          secureTextEntry={true}
           style={styles.authInput}
         />
         <Button
