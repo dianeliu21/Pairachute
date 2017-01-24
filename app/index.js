@@ -8,13 +8,13 @@ import scenes from './config/scenes';
 const store = configureStore();
 
 // Connect react native router flux with Redux
-const RouterWithRedux = connect()(Router);
+// const RouterWithRedux = connect()(Router);
 
 export default class App extends Component {
   render() {
     return (
       <Provider store={store}>
-        <RouterWithRedux scenes={scenes}/>
+        <Router scenes={scenes}/>
       </Provider>
     );
   }
