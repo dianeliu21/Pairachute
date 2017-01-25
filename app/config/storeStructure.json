@@ -1,6 +1,7 @@
 {
   "authState": {
     "isAuthenticated": false,
-    "authErrorMessage": "",
+    "isPending": false,
+    "errorMessage": "",
   }
 }

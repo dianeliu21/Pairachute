@@ -1,13 +1,11 @@
-import createReducer from '../lib/createReducer';
 import * as types from '../actions/actionTypes';
 
-
-export function login(state = {}, action) {
+export function authState(state = {}, action) {
   switch(action.type) {
     case types.LOGIN_ATTEMPT:
       return Object.assign({}, state, {
         isAuthenticated: false,
-        isPending: true,
+        isPending: true
       })
     case types.LOGIN_SUCCESSFUL:
       return Object.assign({}, state, {
@@ -17,8 +15,9 @@ export function login(state = {}, action) {
       })
     case types.LOGIN_FAILURE:
       return Object.assign({}, state, {
+        errorMessage: action.errorMessage,
         isAuthenticated: false,
-        isPending: false,
+        isPending: false
       })
     default:
       return state;

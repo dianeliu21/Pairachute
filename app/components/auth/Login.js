@@ -16,14 +16,14 @@ class Login extends Component {
       email: '',
       password: '',
     }
-    // console.log(this.props)
   }
 
   render() {
+    console.log(this.props)
     return(
       <View style={styles.container}>
         <Text style={styles.authTitle}>Pairachute</Text>
-        <Text>{this.props.authErrorMessage}</Text>
+        <Text style={styles.authErrorText}>{ this.props.authState.errorMessage }</Text>
         <TextInput
           onChangeText={(email) => this.setState({email})}
           placeholder="Email Address"

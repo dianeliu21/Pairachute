@@ -6,8 +6,7 @@ import { login } from '../../actions/authActions';
 
 const mapStateToProps = (state) => {
   return {
-    isAuthenticated: state.isAuthenticated
-    authErrorMessage: state.authErrorMessage
+    authState: state.authState,
   }
 }
 const mapDispatchToProps = (dispatch) => {

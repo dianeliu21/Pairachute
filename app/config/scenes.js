@@ -11,7 +11,7 @@ const scenes = Actions.create(
   <Scene key="root">
     <Scene
       key="splash"
-      component={connect(state=>({isAuthenticated: state.isAuthenticated}))(Switch)}
+      component={connect(state=>({ isAuthenticated: state.authState ? state.authState.isAuthenticated : false }))(Switch)}
       tabs={true}
       selector={props=>props.isAuthenticated ? "home" : "authContainer"}
       initialScene={true}

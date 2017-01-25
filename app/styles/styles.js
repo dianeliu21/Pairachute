@@ -11,6 +11,11 @@ const styles = StyleSheet.create({
   },
 
   // Login/Signup and Auth
+  authErrorText: {
+    color: 'red',
+    textAlign: 'center',
+    margin: 10
+  },
   authInput: {
     borderColor: 'gray',
     borderWidth: 1,
@@ -29,7 +34,6 @@ const styles = StyleSheet.create({
   authTitle: {
     fontSize: 40,
     textAlign: 'center',
-    margin: 20,
   },
 });
 
