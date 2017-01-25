@@ -3,6 +3,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { signup } from '../../actions/authActions';
 
+// Signup component
 import React, { Component } from 'react';
 const styles = require("../../styles/styles.js");
 import {

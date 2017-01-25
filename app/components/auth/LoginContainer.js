@@ -3,7 +3,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { login } from '../../actions/authActions';
 
-
+// Login component
 import React, { Component } from 'react';
 import { Actions } from 'react-native-router-flux';
 const styles = require("../../styles/styles.js");
@@ -52,6 +52,7 @@ class Login extends Component {
     );
   }
 }
+
 
 const mapStateToProps = (state) => {
   return {
