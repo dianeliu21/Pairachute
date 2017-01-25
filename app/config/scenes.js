@@ -1,10 +1,9 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Actions, Scene, Switch } from 'react-native-router-flux';
-import AuthContainer from '../components/auth/AuthContainer';
+import LoginContainer from '../components/auth/LoginContainer';
 import Home from '../components/home/Home';
-import Login from '../components/auth/Login';
-import Signup from '../components/auth/Signup';
+import SignupContainer from '../components/auth/SignupContainer';
 
 
 const scenes = Actions.create(
@@ -13,13 +12,13 @@ const scenes = Actions.create(
       key="splash"
       component={connect(state=>({ isAuthenticated: state.authState ? state.authState.isAuthenticated : false }))(Switch)}
       tabs={true}
-      selector={props=>props.isAuthenticated ? "home" : "authContainer"}
+      selector={props=>props.isAuthenticated ? "home" : "login"}
       initialScene={true}
     >
-      <Scene key="authContainer" component={AuthContainer} hideNavBar={true}/>
+      <Scene key="login" component={LoginContainer} hideNavBar={true}/>
       <Scene key="home" component={Home} hideNavBar={true}/>
     </Scene>
-    <Scene key="signup" component={Signup}/>
+    <Scene key="signup" component={SignupContainer}/>
   </Scene>
 );
 

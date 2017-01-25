@@ -2,10 +2,8 @@ import React, { Component } from 'react';
 const styles = require("../../styles/styles.js");
 import {
   Button,
-  Navigator,
   Text,
   TextInput,
-  TouchableHighlight,
   View,
 } from 'react-native';
 import * as firebase from 'firebase';
@@ -20,17 +18,6 @@ export class Signup extends Component {
     }
   }
 
-  async signup(email, password) {
-    try{
-      // await firebase.auth().createUserWithEmailAndPassword(email, password);
-      console.log("Account created");
-      // Navigate to new user flow
-
-    } catch(error) {
-      console.log(error.toString());
-    }
-  }
-
   verify_password(password) {
     password === this.state.password ? this.setState({passwordMatch: true}) : this.setState({passwordMatch: false});
   }
@@ -39,6 +26,7 @@ export class Signup extends Component {
     return (
       <View style={styles.container}>
         <Text style={styles.authTitle}>New Account</Text>
+        <Text style={styles.authErrorText}>{this.props.authState.errorMessage}</Text>
         <TextInput
           onChangeText={(email) => this.setState({email})}
           placeholder="Email Address"
@@ -57,7 +45,7 @@ export class Signup extends Component {
           style={[styles.authInput, this.state.passwordMatch ? null : styles.authInputIncorrect]}
         />
         <Button
-          onPress={() => this.signup()}
+          onPress={() => this.props.signup(this.state.email, this.state.password)}
           title="Sign Up"
         />
       </View>

@@ -1,7 +1,6 @@
 import Login from './Login';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import * as ActionCreators from '../../actions';
 import { login } from '../../actions/authActions';
 
 const mapStateToProps = (state) => {
@@ -13,9 +12,9 @@ const mapDispatchToProps = (dispatch) => {
   return bindActionCreators({login}, dispatch);
 }
 
-const AuthContainer = connect(
+const LoginContainer = connect(
   mapStateToProps,
   mapDispatchToProps,
 )(Login)
 
-export default AuthContainer;
+export default LoginContainer;

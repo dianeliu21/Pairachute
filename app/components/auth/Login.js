@@ -3,7 +3,6 @@ import { Actions } from 'react-native-router-flux';
 const styles = require("../../styles/styles.js");
 import {
   Button,
-  Navigator,
   Text,
   TextInput,
   View,
