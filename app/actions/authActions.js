@@ -51,7 +51,8 @@ function loginAttempt() {
 }
 
 function loginSuccess(user) {
-  Actions.home
+  Actions.tabbar();
+  console.log("TRIED TO SEND TABBAR ACTION");
   return {
     type: types.LOGIN_SUCCESS,
     user
@@ -74,7 +75,7 @@ function signupAttempt() {
 
 
 function signupSuccess(user) {
-  Actions.home
+  Actions.home()
   return {
     type: types.SIGNUP_SUCCESS,
     user

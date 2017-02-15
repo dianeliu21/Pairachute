@@ -45,7 +45,7 @@ class Login extends Component {
           title="Log In"
         />
         <Button
-          onPress={Actions.signup}
+          onPress={() => Actions.signup()}
           title="Don't have an account? Sign up"
         />
       </View>

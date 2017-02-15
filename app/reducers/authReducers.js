@@ -13,7 +13,6 @@ export function authState(state = {}, action) {
       return Object.assign({}, state, {
         isAuthenticated: true,
         isPending: false,
-        user: action.user
       })
     case types.LOGIN_FAILURE:
     case types.SIGNUP_FAILURE:

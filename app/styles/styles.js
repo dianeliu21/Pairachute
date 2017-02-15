@@ -35,6 +35,16 @@ const styles = StyleSheet.create({
     fontSize: 40,
     textAlign: 'center',
   },
+
+
+  // TabBar Styles
+  tabBar: {
+    backgroundColor: 'white',
+    borderColor: '#b7b7b7',
+    borderWidth: 0.5,
+    opacity: 1,
+  },
+
 });
 
 module.exports = styles
