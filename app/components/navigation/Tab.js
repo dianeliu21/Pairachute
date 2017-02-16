@@ -14,6 +14,7 @@ class Tab extends Component {
     return(
       <View style={styles.container}>
         <Text>{this.props.title}</Text>
+        <Text>{this.props.user.email}</Text>
       </View>
     );
   }
