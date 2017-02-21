@@ -6,6 +6,7 @@ const styles = require("../styles/styles.js");
 import DummyLoginContainer from '../components/auth/DummyLoginContainer';
 import HomeContainer from '../components/home/HomeContainer';
 import LoginContainer from '../components/auth/LoginContainer';
+import MessagesTabContainer from '../components/messages/MessagesTabContainer';
 import SignupContainer from '../components/auth/SignupContainer';
 import TabContainer from '../components/navigation/TabContainer';
 import TabIcon from '../components/navigation/TabIcon';
@@ -18,7 +19,7 @@ const scenes = Actions.create(
     <Scene key="home" component={HomeContainer}/>
     <Scene key="tabbar" tabs tabBarStyle={styles.tabBar}>
       <Scene key="tab1" title="Home" icon={TabIcon} component={TabContainer} hideNavBar/>
-      <Scene key="tab2" title="Messages" icon={TabIcon} component={TabContainer} initial hideNavBar/>
+      <Scene key="tab2" title="Messages" icon={TabIcon} component={MessagesTabContainer} initial hideNavBar/>
       <Scene key="tab3" title="Settings" icon={TabIcon} component={TabContainer} hideNavBar/>
     </Scene>
   </Scene>
