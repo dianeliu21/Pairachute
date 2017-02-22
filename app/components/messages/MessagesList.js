@@ -6,7 +6,7 @@ import {
 } from 'react-native';
 const styles = require('../../styles/styles.js');
 
-import MessageRow from './MessageRow';
+import MessagesListRow from './MessagesListRow';
 
 class MessagesList extends Component {
   constructor(props) {
@@ -31,7 +31,7 @@ class MessagesList extends Component {
         <ListView
           dataSource={this.state.dataSource}
           enableEmptySections={true}
-          renderRow={(data) => <MessageRow data={data}/>}
+          renderRow={(data) => <MessagesListRow data={data}/>}
           style={{marginTop: 20}}
         />
     );

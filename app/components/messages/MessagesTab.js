@@ -17,8 +17,6 @@ class MessagesTab extends Component {
   }
 
   render() {
-    console.log("MessageTab:")
-    console.log(this.props)
     return(
       <View style={styles.container}>
         <Button

@@ -13,8 +13,8 @@ import TabIcon from '../components/navigation/TabIcon';
 
 const scenes = Actions.create(
   <Scene key="root">
-    <Scene key="dummylogin" component={DummyLoginContainer} hideNavBar initial/>
-    <Scene key="login" component={LoginContainer} hideNavBar/>
+    <Scene key="dummylogin" component={DummyLoginContainer} hideNavBar/>
+    <Scene key="login" component={LoginContainer} hideNavBar initial/>
     <Scene key="signup" component={SignupContainer}/>
     <Scene key="home" component={HomeContainer}/>
     <Scene key="tabbar" tabs tabBarStyle={styles.tabBar}>

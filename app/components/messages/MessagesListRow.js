@@ -20,7 +20,7 @@ const styles = StyleSheet.create({
   }
 });
 
-class MessageRow extends Component {
+class MessagesListRow extends Component {
   constructor(props) {
     super(props)
   }
@@ -35,4 +35,4 @@ class MessageRow extends Component {
   }
 }
 
-module.exports = MessageRow;
+module.exports = MessagesListRow;
