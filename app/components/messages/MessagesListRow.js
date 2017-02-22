@@ -2,8 +2,10 @@ import React, {Component} from 'react';
 import {
   StyleSheet,
   Text,
+  TouchableHighlight,
   View,
 } from 'react-native';
+import { Actions } from 'react-native-router-flux';
 // const styles = require('../../styles/styles.js');
 
 const styles = StyleSheet.create({
@@ -26,11 +28,17 @@ class MessagesListRow extends Component {
   }
 
   render() {
+    console.log('message list row data', this.props.thread_info)
     return(
-      <View style={styles.container}>
-        <Text style={styles.title}>{this.props.data.title}</Text>
-        <Text style={styles.message}>{this.props.data.last_message}</Text>
-      </View>
+      <TouchableHighlight
+        style={{backgroundColor: 'red'}}
+        onPress={() => this.props.loadMessages(this.props.thread_info)}
+      >
+        <View style={styles.container}>
+          <Text style={styles.title}>{this.props.thread_info.title}</Text>
+          <Text style={styles.message}>{this.props.thread_info.last_message}</Text>
+        </View>
+      </TouchableHighlight>
     );
   }
 }

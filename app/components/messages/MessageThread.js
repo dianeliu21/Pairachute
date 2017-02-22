@@ -7,10 +7,14 @@ import {
 
 class MessageThread extends Component {
   constructor(props) {
-    super(props)
+    super(props);
+  }
+
+  render() {
+    return(
+      <Text>Hello this is a message thread</Text>
+    );
   }
 }
 
-render() {
-
-}
+module.exports = MessageThread;

@@ -31,7 +31,7 @@ class MessagesList extends Component {
         <ListView
           dataSource={this.state.dataSource}
           enableEmptySections={true}
-          renderRow={(data) => <MessagesListRow data={data}/>}
+          renderRow={(data) => <MessagesListRow loadMessages={this.props.loadMessages} thread_info={data}/>}
           style={{marginTop: 20}}
         />
     );

@@ -23,7 +23,7 @@ class MessagesTab extends Component {
           onPress={() => console.log("new msg")}
           title="New Message">
         </Button>
-        <MessagesList dataSource={this.props.threads.threads}/>
+        <MessagesList loadMessages={this.props.loadMessages} dataSource={this.props.threads.threads}/>
       </View>
     );
   }

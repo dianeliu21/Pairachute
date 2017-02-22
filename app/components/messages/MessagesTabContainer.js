@@ -1,6 +1,6 @@
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { loadThreadList } from '../../actions/messagesActions';
+import { loadThreadList, loadMessages } from '../../actions/messagesActions';
 
 import MessagesTab from './MessagesTab'
 
@@ -12,7 +12,10 @@ const mapStateToProps = (state) => {
 }
 
 const mapDispatchToProps = (dispatch) => {
-  return bindActionCreators({loadThreadList}, dispatch);
+  return bindActionCreators({
+    loadThreadList,
+    loadMessages,
+  }, dispatch);
 }
 
 const MessagesTabContainer = connect(

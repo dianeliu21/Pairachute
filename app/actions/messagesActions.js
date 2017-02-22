@@ -21,17 +21,22 @@ export function loadThreadList() {
           if (info.val().title) {
             title = info.val().title
           } else {
-            userids = Object.keys(info.val().users).filter((val) => {if (val!==uid) return val})
-            names = []
+            var names = []
+            var users = {}
+            var userids = Object.keys(info.val().users)
             for (var i in userids) {
               let name = await db.ref('/users/' + userids[i] + '/name').once('value')
-              names.push(name.val())
+              // users.push({ id: userids[i], name: name })
+              users[userids[i]] = name.val()
+              if (userids[i] !== uid) names.push(name.val())
             }
-            title=names.join(', ')
+            var title = names.join(', ')
           }
           threads.push({
+            id: id,
+            users: users,
             last_message: info.val().last_message,
-            title: title
+            title: title,
           })
         }
         dispatch(loadThreadListSuccess(threads))
@@ -40,6 +45,26 @@ export function loadThreadList() {
     } catch(err) {
       console.log(err)
       dispatch(loadThreadListFailure())
+    }
+  }
+}
+
+export function loadMessages(thread_info) {
+  console.log('here ya go');
+  return function(dispatch) {
+    try {
+      dispatch(loadMessagesAttempt())
+
+      // get messages for this thread for initial load
+      var last25MsgRef = db.ref('/messages/' + thread_info.id).limitToLast(25)
+      last25MsgRef.on('value', async function(snapshot) {
+         var focused_thread = Object.assign({}, thread_info)
+         focused_thread.messages = snapshot.val()
+         dispatch(loadMessagesSuccess(focused_thread))
+      })
+    } catch(err) {
+      console.log(err)
+      dispatch(loadMessagesFailure())
     }
   }
 }
@@ -60,5 +85,26 @@ function loadThreadListSuccess(threads) {
 function loadThreadListFailure() {
   return {
     type: types.LOAD_THREAD_LIST_FAILURE,
+  }
+}
+
+function loadMessagesAttempt() {
+  return {
+    type: types.LOAD_MESSAGES_ATTEMPT,
+  }
+}
+
+function loadMessagesSuccess(thread_info) {
+  console.log('loadmessagesuccess', thread_info);
+  Actions.message()
+  return {
+    type: types.LOAD_MESSAGES_SUCCESS,
+    thread_info
+  }
+}
+
+function loadMessagesFailure() {
+  return {
+    type: types.LOAD_MESSAGES_FAILURE,
   }
 }

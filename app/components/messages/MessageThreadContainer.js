@@ -1,23 +1,25 @@
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { loadThread } from '../../actions/messagesActions';
+import { loadMessages } from '../../actions/messagesActions';
 
 import MessageThread from './MessageThread'
 
 const mapStateToProps = (state) => {
   return {
     user: state.user,
-    focusedMessageThread: state.focusedMessageThread,
+    focusedThread: state.focusedThread,
   }
 }
 
 const mapDispatchToProps = (dispatch) => {
-  return bindActionCreators({}, dispatch);
+  return bindActionCreators({
+    loadMessages,
+  }, dispatch);
 }
 
 const MessagesThreadContainer = connect(
   mapStateToProps,
   mapDispatchToProps
-)(MessagesThread)
+)(MessageThread)
 
 export default MessagesThreadContainer;
