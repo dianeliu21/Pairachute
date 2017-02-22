@@ -18,6 +18,7 @@ export class Signup extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      name: '',
       email: '',
       password: '',
       passwordMatch: true,
@@ -33,6 +34,11 @@ export class Signup extends Component {
       <View style={styles.container}>
         <Text style={styles.authTitle}>New Account</Text>
         <Text style={styles.authErrorText}>{this.props.authState.errorMessage}</Text>
+        <TextInput
+          onChangeText={(name) => this.setState({name})}
+          placeholder="Name"
+          style={styles.authInput}
+        />
         <TextInput
           onChangeText={(email) => this.setState({email})}
           placeholder="Email Address"
@@ -51,7 +57,7 @@ export class Signup extends Component {
           style={[styles.authInput, this.state.passwordMatch ? null : styles.authInputIncorrect]}
         />
         <Button
-          onPress={() => this.props.signup(this.state.email, this.state.password)}
+          onPress={() => this.props.signup(this.state.name, this.state.email, this.state.password)}
           title="Sign Up"
         />
       </View>

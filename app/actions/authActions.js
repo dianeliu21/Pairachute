@@ -1,6 +1,7 @@
 import * as types from './actionTypes';
 import { Actions } from 'react-native-router-flux';
 import fb from '../config/initializeFirebase';
+var db = fb.database();
 
 export function login(email, password) {
   return function (dispatch) {
@@ -23,7 +24,7 @@ export function login(email, password) {
   }
 }
 
-export function signup(email, password) {
+export function signup(name, email, password) {
   return function (dispatch) {
     dispatch(signupAttempt());
     return fb.auth().createUserWithEmailAndPassword(email, password)
@@ -36,6 +37,12 @@ export function signup(email, password) {
           refreshToken: response.refreshToken,
           uid: response.uid,
         };
+
+        // put user info in firebase
+        db.ref('/users/' + response.uid).set({
+          name: name,
+        })
+
         dispatch(signupSuccess(user))
       }).catch(function(error) {
         console.log(error.message)
@@ -74,7 +81,7 @@ function signupAttempt() {
 
 
 function signupSuccess(user) {
-  Actions.home()
+  Actions.tabbar()
   return {
     type: types.SIGNUP_SUCCESS,
     user
