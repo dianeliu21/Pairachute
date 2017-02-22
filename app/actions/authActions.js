@@ -52,7 +52,6 @@ function loginAttempt() {
 
 function loginSuccess(user) {
   Actions.tabbar();
-  console.log("TRIED TO SEND TABBAR ACTION");
   return {
     type: types.LOGIN_SUCCESS,
     user

@@ -1,16 +1,23 @@
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
+import { loadThreadList } from '../../actions/messagesActions';
 
 import MessagesTab from './MessagesTab'
 
 const mapStateToProps = (state) => {
   return {
-    user: state.user
+    user: state.user,
+    threads: state.threads
   }
 }
 
-// const mapDispatchToProps
+const mapDispatchToProps = (dispatch) => {
+  return bindActionCreators({loadThreadList}, dispatch);
+}
 
-const MessagesTabContainer = connect(mapStateToProps)(MessagesTab)
+const MessagesTabContainer = connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(MessagesTab)
 
 export default MessagesTabContainer;
