@@ -20,7 +20,7 @@ class MessageBubble extends Component {
   render() {
     console.log(this.props)
     return(
-      <View style={this._getBubbleStyle()}>
+      <View style={[styles.messageBubble, this._getBubbleStyle()]}>
         <Text>{this.props.message.sender_name}</Text>
         <Text>{this.props.message.message}</Text>
       </View>

@@ -10,7 +10,9 @@ import { Actions } from 'react-native-router-flux';
 
 const styles = StyleSheet.create({
   container: {
-    padding: 10,
+    alignItems: 'stretch',
+    backgroundColor: 'red',
+    flexDirection: 'column'
   },
   message: {
     color: 'gray',
@@ -31,7 +33,6 @@ class MessagesListRow extends Component {
     console.log('message list row data', this.props.thread_info)
     return(
       <TouchableHighlight
-        style={{backgroundColor: 'red'}}
         onPress={() => this.props.loadMessages(this.props.thread_info)}
       >
         <View style={styles.container}>

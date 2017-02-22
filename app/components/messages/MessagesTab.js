@@ -18,7 +18,7 @@ class MessagesTab extends Component {
 
   render() {
     return(
-      <View style={styles.container}>
+      <View>
         <Button
           onPress={() => console.log("new msg")}
           title="New Message">

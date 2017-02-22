@@ -51,10 +51,13 @@ const styles = StyleSheet.create({
 
   // Message Bubble
 
+  messageBubble: {
+    margin: 5
+  },
   messageThread: {
-    alignItems: 'stretch',
-    flex: 1,
-    flexDirection: 'column',
+    // alignItems: 'flex-start',
+    // flex: 1,
+    // flexDirection: 'column',
   },
   receivedMessage: {
     backgroundColor: 'grey',

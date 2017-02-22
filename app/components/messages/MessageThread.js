@@ -3,6 +3,7 @@ import {
   Button,
   ListView,
   Text,
+  TextInput,
   View,
 } from 'react-native';
 const styles = require('../../styles/styles.js');
@@ -14,7 +15,7 @@ class MessageThread extends Component {
     super(props);
     const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
     this.state = {
-      dataSource: ds.cloneWithRows([])
+      dataSource: ds.cloneWithRows(this.props.focusedThread.messages ? this.props.focusedThread.messages : [])
     }
   }
 
@@ -27,17 +28,40 @@ class MessageThread extends Component {
     }
   }
 
-  render() {
-    console.log('messagethread props', this.props)
+  _renderFooter() {
     return(
-      <ListView
-        dataSource={this.state.dataSource}
-        enableEmptySections={true}
-        renderRow={(data) => <MessageBubble user={this.props.user} message={data}/>}
-        style={{marginTop:100}}
+      <TextInput
+        style={{margin: 2, height: 40, borderColor: 'gray', borderWidth: 1}}
+        onChangeText={(text) => this.setState({text})}
+        placeholder='Type a message'
+        value={this.state.text}
       />
+    )
+  }
+
+  render() {
+    return(
+      <View style={{flex: 1}}>
+        <ListView
+          renderScrollComponent={props => <InvertibleScrollView {...props} inverted/>}
+          dataSource={this.state.dataSource}
+          enableEmptySections={true}
+          renderRow={(data) => <MessageBubble user={this.props.user} message={data}/>}
+          style={{marginTop:100}}
+        />
+        <TextInput
+          style={{margin: 2, height: 40, bottom: 0, borderColor: 'gray', borderWidth: 1}}
+          onChangeText={(text) => this.setState({text})}
+          placeholder='Type a message'
+          value={this.state.text}
+        />
+        <Button
+          onPress={() => console.log('hello!')}
+          title='Send'
+        />
+      </View>
     );
   }
 }
-// renderScrollComponent={(props)=><InvertibleScrollView {...props} inverted/>}
+
 module.exports = MessageThread;
