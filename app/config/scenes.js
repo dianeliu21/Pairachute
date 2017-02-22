@@ -23,7 +23,7 @@ const scenes = Actions.create(
       <Scene key="tab2" title="Messages" icon={TabIcon} component={MessagesTabContainer} initial hideNavBar/>
       <Scene key="tab3" title="Settings" icon={TabIcon} component={TabContainer} hideNavBar/>
     </Scene>
-    <Scene key="message" title="Message" component={MessageThreadContainer}/>
+    <Scene key="message" title="Message" component={MessageThreadContainer} hideNavBar={false}/>
   </Scene>
 );
 

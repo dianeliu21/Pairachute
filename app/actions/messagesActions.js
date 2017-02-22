@@ -50,14 +50,13 @@ export function loadThreadList() {
 }
 
 export function loadMessages(thread_info) {
-  console.log('here ya go');
   return function(dispatch) {
     try {
       dispatch(loadMessagesAttempt())
 
       // get messages for this thread for initial load
       var last25MsgRef = db.ref('/messages/' + thread_info.id).limitToLast(25)
-      last25MsgRef.on('value', async function(snapshot) {
+      last25MsgRef.on('value', function(snapshot) {
          var focused_thread = Object.assign({}, thread_info)
          focused_thread.messages = snapshot.val()
          dispatch(loadMessagesSuccess(focused_thread))

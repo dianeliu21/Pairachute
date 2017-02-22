@@ -45,6 +45,26 @@ const styles = StyleSheet.create({
     opacity: 1,
   },
 
+  ///////////////
+  // Messaging //
+  ///////////////
+
+  // Message Bubble
+
+  messageThread: {
+    alignItems: 'stretch',
+    flex: 1,
+    flexDirection: 'column',
+  },
+  receivedMessage: {
+    backgroundColor: 'grey',
+    marginRight: 50,
+  },
+  sentMessage: {
+    backgroundColor: 'blue',
+    marginLeft: 50,
+  },
+
 });
 
 module.exports = styles
