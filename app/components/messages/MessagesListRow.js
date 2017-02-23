@@ -27,17 +27,29 @@ const styles = StyleSheet.create({
 class MessagesListRow extends Component {
   constructor(props) {
     super(props)
+    this.state = {
+      title: this.props.thread_info.title,
+      msg_preview: this.props.thread_info.last_message ? this.props.thread_info.last_message.message : ''
+    }
   }
 
+  componentWillReceiveProps(nextProps) {
+    if (this.props.thread_info !== nextProps.thread_info) {
+      this.setState({
+        title: nextProps.thread_info.title,
+        msg_preview: nextProps.thread_info.last_message.message
+      })
+    }
+  }
+
+
   render() {
-    console.log('message list row data', this.props.thread_info)
+    console.log('message list row data', this.props.thread_info )
     return(
-      <TouchableHighlight
-        onPress={() => this.props.loadMessages(this.props.thread_info)}
-      >
+      <TouchableHighlight onPress={() => this.props.loadMessages(this.props.thread_info)}>
         <View style={styles.container}>
-          <Text style={styles.title}>{this.props.thread_info.title}</Text>
-          <Text style={styles.message}>{this.props.thread_info.last_message}</Text>
+          <Text style={styles.title}>{this.state.title}</Text>
+          <Text style={styles.message}>{this.state.msg_preview}</Text>
         </View>
       </TouchableHighlight>
     );

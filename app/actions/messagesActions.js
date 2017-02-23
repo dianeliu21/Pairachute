@@ -26,7 +26,6 @@ export function loadThreadList() {
             var userids = Object.keys(info.val().users)
             for (var i in userids) {
               let name = await db.ref('/users/' + userids[i] + '/name').once('value')
-              // users.push({ id: userids[i], name: name })
               users[userids[i]] = name.val()
               if (userids[i] !== uid) names.push(name.val())
             }
@@ -55,7 +54,7 @@ export function loadMessages(thread_info) {
       dispatch(loadMessagesAttempt())
 
       // get messages for this thread for initial load
-      var last25MsgRef = db.ref('/messages/' + thread_info.id).limitToLast(25)
+      var last25MsgRef = db.ref('/messages/' + thread_info.id).limitToLast(8)
       last25MsgRef.on('value', function(snapshot) {
          var focused_thread = Object.assign({}, thread_info)
          focused_thread.messages = snapshot.val()
@@ -64,6 +63,31 @@ export function loadMessages(thread_info) {
     } catch(err) {
       console.log(err)
       dispatch(loadMessagesFailure())
+    }
+  }
+}
+
+export function sendMessage(message, sender_id, thread_id) {
+  return async function(dispatch) {
+    try {
+      dispatch(sendMessageAttempt())
+      var msgData = {
+        message: message,
+        sender_id: sender_id,
+        timestamp: Date.now(),
+      }
+
+      var newMsgKey = db.ref('/messages').push().key
+      var updates = {}
+      updates['/messages/' + thread_id + '/' + newMsgKey] = msgData
+      updates['/threads/' + thread_id + '/last_message'] = msgData
+
+      let update_success = await db.ref().update(updates);
+      dispatch(sendMessageSuccess())
+
+    } catch(err) {
+      console.log(err)
+      dispatch(sendMessageFailure())
     }
   }
 }
@@ -94,7 +118,6 @@ function loadMessagesAttempt() {
 }
 
 function loadMessagesSuccess(thread_info) {
-  console.log('loadmessagesuccess', thread_info);
   Actions.message()
   return {
     type: types.LOAD_MESSAGES_SUCCESS,
@@ -105,5 +128,23 @@ function loadMessagesSuccess(thread_info) {
 function loadMessagesFailure() {
   return {
     type: types.LOAD_MESSAGES_FAILURE,
+  }
+}
+
+function sendMessageAttempt() {
+  return {
+    type: types.SEND_MESSAGE_ATTEMPT,
+  }
+}
+
+function sendMessageSuccess(thread_info) {
+  return {
+    type: types.SEND_MESSAGE_SUCCESS,
+  }
+}
+
+function sendMessageFailure() {
+  return {
+    type: types.SEND_MESSAGE_FAILURE,
   }
 }

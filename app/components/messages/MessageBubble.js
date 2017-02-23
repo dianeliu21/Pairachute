@@ -12,16 +12,21 @@ class MessageBubble extends Component {
   }
 
   _getBubbleStyle() {
-    return this.props.message.sender_id === this.props.user.uid
+    return this.props.message.sender_id === this.props.sender_uid
       ? styles.sentMessage
       : styles.receivedMessage
   }
 
+  _getDisplayName(uid) {
+    console.log('this is display name: ', this.props.users[uid])
+    return this.props.users[uid]
+  }
+
   render() {
-    console.log(this.props)
+    console.log('this is message: ', this.props.message.message)
     return(
       <View style={[styles.messageBubble, this._getBubbleStyle()]}>
-        <Text>{this.props.message.sender_name}</Text>
+        <Text>{this._getDisplayName(this.props.message.sender_id)}</Text>
         <Text>{this.props.message.message}</Text>
       </View>
     );

@@ -14,15 +14,22 @@ class MessageThread extends Component {
   constructor(props) {
     super(props);
     const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
+    // var rows = this.props.focusedThread.messages ? this.props.focusedThread.messages : []
+    // var rowIds = rows.map((row, index) => index).reverse();
     this.state = {
-      dataSource: ds.cloneWithRows(this.props.focusedThread.messages ? this.props.focusedThread.messages : [])
+      // dataSource: ds.cloneWithRows(rows, rowIds),
+      dataSource: ds.cloneWithRows(this.props.focusedThread.messages ? this.props.focusedThread.messages : []),
+      text: ''
     }
   }
 
   componentWillReceiveProps(nextProps) {
     if (this.props !== nextProps && nextProps.focusedThread.messages) {
       const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
+      // var rows = nextProps.focusedThread.messages
+      // var rowIds = rows.map((row, index) => index).reverse();
       this.setState({
+        // dataSource: ds.cloneWithRows(rows, rowIds)
         dataSource: ds.cloneWithRows(nextProps.focusedThread.messages)
       })
     }
@@ -39,6 +46,13 @@ class MessageThread extends Component {
     )
   }
 
+  _sendMessage(text, sender_uid, thread_id) {
+    this.props.sendMessage(text, sender_uid, thread_id)
+    this.setState({
+      text: ''
+    })
+  }
+
   render() {
     return(
       <View style={{flex: 1}}>
@@ -46,7 +60,7 @@ class MessageThread extends Component {
           renderScrollComponent={props => <InvertibleScrollView {...props} inverted/>}
           dataSource={this.state.dataSource}
           enableEmptySections={true}
-          renderRow={(data) => <MessageBubble user={this.props.user} message={data}/>}
+          renderRow={(data) => <MessageBubble users={this.props.focusedThread.users} sender_uid={this.props.user.uid} message={data}/>}
           style={{marginTop:100}}
         />
         <TextInput
@@ -56,7 +70,7 @@ class MessageThread extends Component {
           value={this.state.text}
         />
         <Button
-          onPress={() => console.log('hello!')}
+          onPress={() => this._sendMessage(this.state.text, this.props.user.uid, this.props.focusedThread.id)}
           title='Send'
         />
       </View>

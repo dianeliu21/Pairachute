@@ -58,7 +58,7 @@ function loginAttempt() {
 }
 
 function loginSuccess(user) {
-  Actions.tabbar();
+  // Actions.tabbar();
   return {
     type: types.LOGIN_SUCCESS,
     user

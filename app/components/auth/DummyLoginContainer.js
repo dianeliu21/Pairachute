@@ -20,13 +20,18 @@ class DummyLogin extends Component {
     super(props);
   }
 
+  async _login(email, password) {
+    await this.props.login(email, password)
+    Actions.tabbar()
+  }
+
   render() {
     return(
       <View style={styles.container}>
         <Text style={styles.authTitle}>Pairachute</Text>
         <Text>Dummy Login - for testing purposes only</Text>
         <Button
-          onPress={() => this.props.login(secrets.TEST_EMAIL, secrets.TEST_PASSWORD)}
+          onPress={() => this._login(secrets.TEST_EMAIL, secrets.TEST_PASSWORD)}
           title="Log In"
         />
       </View>

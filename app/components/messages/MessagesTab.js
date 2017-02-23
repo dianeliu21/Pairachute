@@ -12,8 +12,8 @@ class MessagesTab extends Component {
     super(props);
   }
 
-  componentWillMount() {
-    this.props.loadThreadList();
+  async componentWillMount() {
+    await this.props.loadThreadList();
   }
 
   render() {

@@ -1,6 +1,6 @@
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { loadMessages } from '../../actions/messagesActions';
+import { loadMessages, sendMessage } from '../../actions/messagesActions';
 
 import MessageThread from './MessageThread'
 
@@ -14,6 +14,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return bindActionCreators({
     loadMessages,
+    sendMessage,
   }, dispatch);
 }
 
