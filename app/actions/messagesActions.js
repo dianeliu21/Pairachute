@@ -54,7 +54,9 @@ export function loadMessages(thread_info) {
       dispatch(loadMessagesAttempt())
 
       // get messages for this thread for initial load
-      var last25MsgRef = db.ref('/messages/' + thread_info.id).limitToLast(8)
+      // var last25MsgRef = db.ref('/messages/' + thread_info.id).limitToLast(8)
+
+      var last25MsgRef = db.ref('/messages/' + thread_info.id)
       last25MsgRef.on('value', function(snapshot) {
          var focused_thread = Object.assign({}, thread_info)
          focused_thread.messages = snapshot.val()
@@ -118,7 +120,7 @@ function loadMessagesAttempt() {
 }
 
 function loadMessagesSuccess(thread_info) {
-  Actions.message()
+  Actions.message({title: thread_info.title})
   return {
     type: types.LOAD_MESSAGES_SUCCESS,
     thread_info

@@ -2,35 +2,53 @@ import React, {Component} from 'react';
 import {
   Button,
   ListView,
+  ScrollView,
   Text,
   TextInput,
   View,
 } from 'react-native';
 const styles = require('../../styles/styles.js');
-import InvertibleScrollView from 'react-native-invertible-scroll-view';
+// import InvertibleScrollView from 'react-native-invertible-scroll-view';
 import MessageBubble from './MessageBubble';
 
 class MessageThread extends Component {
   constructor(props) {
     super(props);
     const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
-    // var rows = this.props.focusedThread.messages ? this.props.focusedThread.messages : []
-    // var rowIds = rows.map((row, index) => index).reverse();
     this.state = {
-      // dataSource: ds.cloneWithRows(rows, rowIds),
-      dataSource: ds.cloneWithRows(this.props.focusedThread.messages ? this.props.focusedThread.messages : []),
+      dataSource: ds.cloneWithRows(this.prepareMessages()),
+      listHeight: 0,
+      screenWidth: 0,
+      scrollViewHeight: 0,
       text: ''
     }
+  }
+
+  prepareMessages(messages=this.props.focusedThread.messages) {
+    if (messages) {
+      prev_sender_id = null
+      for (var key in messages) {
+        messages[key].prev_sender_id = prev_sender_id
+        prev_sender_id = messages[key].sender_id
+      }
+      return messages
+    } else {
+      return []
+    }
+  }
+
+  componentDidUpdate() {
+    // calculate bottom
+    const bottomOfList =  this.state.listHeight - this.state.scrollViewHeight
+    // tell the scrollView component to scroll to it
+    this.scrollView.scrollTo({ y: bottomOfList, animated: false })
   }
 
   componentWillReceiveProps(nextProps) {
     if (this.props !== nextProps && nextProps.focusedThread.messages) {
       const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
-      // var rows = nextProps.focusedThread.messages
-      // var rowIds = rows.map((row, index) => index).reverse();
       this.setState({
-        // dataSource: ds.cloneWithRows(rows, rowIds)
-        dataSource: ds.cloneWithRows(nextProps.focusedThread.messages)
+        dataSource: ds.cloneWithRows(this.prepareMessages(nextProps.focusedThread.messages))
       })
     }
   }
@@ -52,27 +70,40 @@ class MessageThread extends Component {
       text: ''
     })
   }
-
+// renderScrollComponent={props => <InvertibleScrollView {...props} inverted/>}
   render() {
     return(
-      <View style={{flex: 1}}>
-        <ListView
-          renderScrollComponent={props => <InvertibleScrollView {...props} inverted/>}
-          dataSource={this.state.dataSource}
-          enableEmptySections={true}
-          renderRow={(data) => <MessageBubble users={this.props.focusedThread.users} sender_uid={this.props.user.uid} message={data}/>}
-          style={{marginTop:100}}
-        />
-        <TextInput
-          style={{margin: 2, height: 40, bottom: 0, borderColor: 'gray', borderWidth: 1}}
-          onChangeText={(text) => this.setState({text})}
-          placeholder='Type a message'
-          value={this.state.text}
-        />
-        <Button
-          onPress={() => this._sendMessage(this.state.text, this.props.user.uid, this.props.focusedThread.id)}
-          title='Send'
-        />
+      <View style={styles.wrapper}>
+        <View style={styles.wrapper}>
+          <ScrollView
+            ref={(component)=> this.scrollView = component}
+            onContentSizeChange={(contentWidth, contentHeight) => {this.setState({listHeight: contentHeight})}}
+            onLayout={(e)=>{this.setState({scrollViewHeight: e.nativeEvent.layout.height, screenWidth:e.nativeEvent.layout.width})}}
+          >
+            <ListView
+              dataSource={this.state.dataSource}
+              enableEmptySections={true}
+              renderRow={(data) => <MessageBubble users={this.props.focusedThread.users} sender_id={this.props.user.uid} message={data}/>}
+              style={{marginTop:100}}
+            />
+          </ScrollView>
+        </View>
+        <View
+          style={styles.messageInputView}
+        >
+          <TextInput
+            multiline={true}
+            onChangeText={(text) => this.setState({text})}
+            placeholder='Type a message'
+            style={[styles.messageTextInput, {width: this.state.screenWidth - 65}]}
+            value={this.state.text}
+          />
+          <Button
+            onPress={() => this._sendMessage(this.state.text, this.props.user.uid, this.props.focusedThread.id)}
+            title='Send'
+            style={styles.messageSend}
+          />
+        </View>
       </View>
     );
   }

@@ -10,6 +10,10 @@ const styles = StyleSheet.create({
     backgroundColor: '#F5FCFF',
   },
 
+  wrapper: {
+    flex: 1,
+  },
+
   // Login/Signup and Auth
   authErrorText: {
     color: 'red',
@@ -50,24 +54,60 @@ const styles = StyleSheet.create({
   ///////////////
 
   // Message Bubble
-
-  messageBubble: {
-    margin: 5
+  messageBubbleWrapper: {
+    marginTop: 2,
+    marginBottom: 2,
+    marginRight: 10,
+    marginLeft: 10,
   },
-  messageThread: {
-    // alignItems: 'flex-start',
-    // flex: 1,
-    // flexDirection: 'column',
+  messageBubble: {
+    borderRadius: 10,
+    paddingTop: 5,
+    paddingBottom: 5,
+    paddingLeft:10,
+    paddingRight:10,
   },
   receivedMessage: {
-    backgroundColor: 'grey',
-    marginRight: 50,
+    alignSelf: 'flex-start',
+    backgroundColor: '#F1F0F0',
+    marginRight: 100,
+  },
+  receivedMessageName: {
+    alignSelf: 'flex-start',
+    color: 'gray',
+    fontSize: 10,
+    marginBottom: 2,
+    marginLeft: 10,
+  },
+  receivedMessageText: {
+    color: 'black',
   },
   sentMessage: {
-    backgroundColor: 'blue',
-    marginLeft: 50,
+    alignSelf: 'flex-end',
+    backgroundColor: '#0084FF',
+    marginLeft: 100,
   },
+  sentMessageText: {
+    color: 'white',
+    textAlign: 'right',
+  },
+  messageInputView: {
+    borderColor: 'gray',
+    borderWidth: 0.5,
+    flexDirection: 'row',
+    marginTop: 10,
+    justifyContent: 'space-between'
+  },
+  messageTextInput: {
+    fontSize: 15,
+    minHeight: 30,
+    padding: 5,
+    paddingLeft: 10,
+    width: 300,
+  },
+  messageSend: {
 
+  },
 });
 
 module.exports = styles
