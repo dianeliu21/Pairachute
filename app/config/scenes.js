@@ -14,13 +14,13 @@ import TabIcon from '../components/navigation/TabIcon';
 
 const scenes = Actions.create(
   <Scene key="root">
-    <Scene key="dummylogin" component={DummyLoginContainer} hideNavBar/>
-    <Scene key="login" component={LoginContainer} hideNavBar initial/>
+    <Scene key="dummylogin" component={DummyLoginContainer} hideNavBar initial/>
+    <Scene key="login" component={LoginContainer} hideNavBar/>
     <Scene key="signup" component={SignupContainer}/>
     <Scene key="home" component={HomeContainer}/>
     <Scene key="tabbar" tabs tabBarStyle={styles.tabBar}>
       <Scene key="tab1" title="Home" icon={TabIcon} component={TabContainer} hideNavBar/>
-      <Scene key="tab2" title="Messages" icon={TabIcon} component={MessagesTabContainer} initial hideNavBar/>
+      <Scene key="tab2" title="Messages" icon={TabIcon} component={MessagesTabContainer} initial renderBackButton={()=> null} rightTitle='New Msg' onRight={()=>console.log('new message')}/>
       <Scene key="tab3" title="Settings" icon={TabIcon} component={TabContainer} hideNavBar/>
     </Scene>
     <Scene key="message" title="Message" component={MessageThreadContainer} hideNavBar={false}/>

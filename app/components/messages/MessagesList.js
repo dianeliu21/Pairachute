@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import {
+  Button,
   ListView,
   Text,
   View,
@@ -32,7 +33,6 @@ class MessagesList extends Component {
           dataSource={this.state.dataSource}
           enableEmptySections={true}
           renderRow={(data) => <MessagesListRow loadMessages={this.props.loadMessages} thread_info={data}/>}
-          style={{marginTop: 20}}
         />
     );
   }

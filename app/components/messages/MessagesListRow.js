@@ -6,23 +6,7 @@ import {
   View,
 } from 'react-native';
 import { Actions } from 'react-native-router-flux';
-// const styles = require('../../styles/styles.js');
-
-const styles = StyleSheet.create({
-  container: {
-    alignItems: 'stretch',
-    backgroundColor: 'red',
-    flexDirection: 'column'
-  },
-  message: {
-    color: 'gray',
-    fontSize: 12,
-  },
-  title: {
-    color: 'black',
-    fontSize: 14,
-  }
-});
+const styles = require('../../styles/styles.js');
 
 class MessagesListRow extends Component {
   constructor(props) {
@@ -46,10 +30,13 @@ class MessagesListRow extends Component {
   render() {
     console.log('message list row data', this.props.thread_info )
     return(
-      <TouchableHighlight onPress={() => this.props.loadMessages(this.props.thread_info)}>
-        <View style={styles.container}>
-          <Text style={styles.title}>{this.state.title}</Text>
-          <Text style={styles.message}>{this.state.msg_preview}</Text>
+      <TouchableHighlight
+        onPress={() => this.props.loadMessages(this.props.thread_info)}
+        underlayColor={'rgba(0,0,0,0.5)'}
+      >
+        <View style={styles.messageListRow}>
+          <Text style={styles.messageListRowTitle}>{this.state.title}</Text>
+          <Text style={styles.messageListRowPreview}>{this.state.msg_preview}</Text>
         </View>
       </TouchableHighlight>
     );

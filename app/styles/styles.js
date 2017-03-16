@@ -53,6 +53,24 @@ const styles = StyleSheet.create({
   // Messaging //
   ///////////////
 
+  // Message List
+  messageListContainer: {
+    marginTop:60
+  },
+  messageListRow: {
+    borderColor: 'gray',
+    borderWidth: 0.5,
+    padding: 10,
+  },
+  messageListRowPreview: {
+    color: 'gray',
+    fontSize: 12,
+  },
+  messageListRowTitle: {
+    color: 'black',
+    fontSize: 14,
+  },
+
   // Message Bubble
   messageBubbleWrapper: {
     marginTop: 2,
@@ -104,9 +122,6 @@ const styles = StyleSheet.create({
     padding: 5,
     paddingLeft: 10,
     width: 300,
-  },
-  messageSend: {
-
   },
 });
 

@@ -16,13 +16,17 @@ class MessagesTab extends Component {
     await this.props.loadThreadList();
   }
 
+  // <View style={styles.messageListHeader}>
+  //   <Text>Messages</Text>
+  //   <Button
+  //     onPress={() => console.log("new msg")}
+  //     title="New Message">
+  //   </Button>
+  // </View>
+
   render() {
     return(
-      <View>
-        <Button
-          onPress={() => console.log("new msg")}
-          title="New Message">
-        </Button>
+      <View style={styles.messageListContainer}>
         <MessagesList loadMessages={this.props.loadMessages} dataSource={this.props.threads.threads}/>
       </View>
     );
