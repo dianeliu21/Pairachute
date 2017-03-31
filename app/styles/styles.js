@@ -4,14 +4,17 @@ const {StyleSheet} = React
 const styles = StyleSheet.create({
   // General Styles
   container: {
+    alignItems: 'center',
     flex: 1,
     justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#F5FCFF',
+    margin: 0,
+    padding: 0,
   },
 
   wrapper: {
     flex: 1,
+    margin: 0,
+    padding: 0,
   },
 
   // Login/Signup and Auth

@@ -8,9 +8,10 @@ import React, { Component } from 'react';
 const styles = require("../../styles/styles.js");
 import {
   Button,
+  KeyboardAvoidingView,
+  ScrollView,
   Text,
   TextInput,
-  View,
 } from 'react-native';
 import * as firebase from 'firebase';
 
@@ -22,6 +23,7 @@ export class Signup extends Component {
       email: '',
       password: '',
       passwordMatch: true,
+      behavior: 'padding'
     }
   }
 
@@ -31,41 +33,42 @@ export class Signup extends Component {
 
   render() {
     return (
-      <View style={styles.container}>
-        <Text style={styles.authTitle}>New Account</Text>
-        <Text style={styles.authErrorText}>{this.props.authState.errorMessage}</Text>
-        <TextInput
-          onChangeText={(name) => this.setState({name})}
-          placeholder="Name"
-          style={styles.authInput}
-        />
-        <TextInput
-          onChangeText={(email) => this.setState({email})}
-          placeholder="Email Address"
-          style={styles.authInput}
-        />
-        <TextInput
-          onChangeText={(password) => this.setState({password})}
-          placeholder="Password"
-          secureTextEntry={true}
-          style={styles.authInput}
-        />
-        <TextInput
-          onChangeText={(password2) => this.verify_password(password2)}
-          placeholder="Verify Password"
-          secureTextEntry={true}
-          style={[styles.authInput, this.state.passwordMatch ? null : styles.authInputIncorrect]}
-        />
-        <Button
-          onPress={() => this.props.signup(this.state.name, this.state.email, this.state.password)}
-          title="Sign Up"
-        />
-        <Button
-          onPress={() => this.props.switchSignupToLogin()}
-          title="Back to Login"
-        />
-      </View>
-
+      <KeyboardAvoidingView behavior={this.state.behavior} style={styles.wrapper}>
+        <ScrollView contentContainerStyle={styles.container}>
+          <Text style={styles.authTitle}>New Account</Text>
+          <Text style={styles.authErrorText}>{this.props.authState.errorMessage}</Text>
+          <TextInput
+            onChangeText={(name) => this.setState({name})}
+            placeholder="Name"
+            style={styles.authInput}
+          />
+          <TextInput
+            onChangeText={(email) => this.setState({email})}
+            placeholder="Email Address"
+            style={styles.authInput}
+          />
+          <TextInput
+            onChangeText={(password) => this.setState({password})}
+            placeholder="Password"
+            secureTextEntry={true}
+            style={styles.authInput}
+          />
+          <TextInput
+            onChangeText={(password2) => this.verify_password(password2)}
+            placeholder="Verify Password"
+            secureTextEntry={true}
+            style={[styles.authInput, this.state.passwordMatch ? null : styles.authInputIncorrect]}
+          />
+          <Button
+            onPress={() => this.props.signup(this.state.name, this.state.email, this.state.password)}
+            title="Sign Up"
+          />
+          <Button
+            onPress={() => this.props.switchSignupToLogin()}
+            title="Back to Login"
+          />
+        </ScrollView>
+      </KeyboardAvoidingView>
     );
   }
 }

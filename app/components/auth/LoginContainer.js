@@ -9,9 +9,9 @@ import { Actions } from 'react-native-router-flux';
 const styles = require("../../styles/styles.js");
 import {
   Button,
+  KeyboardAvoidingView,
   Text,
   TextInput,
-  View,
 } from 'react-native';
 
 class Login extends Component {
@@ -20,13 +20,14 @@ class Login extends Component {
     this.state = {
       email: '',
       password: '',
+      behavior: 'padding'
     }
   }
 
   render() {
     console.log(this.props)
     return(
-      <View style={styles.container}>
+      <KeyboardAvoidingView behavior={this.state.behavior} style={styles.container}>
         <Text style={styles.authTitle}>Pairachute</Text>
         <Text style={styles.authErrorText}>{ this.props.authState.errorMessage }</Text>
         <TextInput
@@ -48,7 +49,7 @@ class Login extends Component {
           onPress={() => this.props.switchLoginToSignup()}
           title="Don't have an account? Sign up"
         />
-      </View>
+      </KeyboardAvoidingView>
     );
   }
 }

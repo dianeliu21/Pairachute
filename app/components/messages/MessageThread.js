@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {
   Button,
+  KeyboardAvoidingView,
   ListView,
   ScrollView,
   Text,
@@ -16,6 +17,7 @@ class MessageThread extends Component {
     super(props);
     const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
     this.state = {
+      behavior: 'padding',
       dataSource: ds.cloneWithRows(this.prepareMessages()),
       listHeight: 0,
       screenWidth: 0,
@@ -70,10 +72,10 @@ class MessageThread extends Component {
       text: ''
     })
   }
-// renderScrollComponent={props => <InvertibleScrollView {...props} inverted/>}
+
   render() {
     return(
-      <View style={styles.wrapper}>
+      <KeyboardAvoidingView behavior={this.state.behavior} style={styles.wrapper}>
         <View style={styles.wrapper}>
           <ScrollView
             ref={(component)=> this.scrollView = component}
@@ -88,9 +90,7 @@ class MessageThread extends Component {
             />
           </ScrollView>
         </View>
-        <View
-          style={styles.messageInputView}
-        >
+        <View style={styles.messageInputView}>
           <TextInput
             multiline={true}
             onChangeText={(text) => this.setState({text})}
@@ -104,7 +104,7 @@ class MessageThread extends Component {
             style={styles.messageSend}
           />
         </View>
-      </View>
+      </KeyboardAvoidingView>
     );
   }
 }

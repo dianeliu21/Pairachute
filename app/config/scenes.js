@@ -16,7 +16,7 @@ const scenes = Actions.create(
   <Scene key="root">
     <Scene key="dummylogin" component={DummyLoginContainer} hideNavBar initial/>
     <Scene key="login" component={LoginContainer} hideNavBar/>
-    <Scene key="signup" component={SignupContainer}/>
+    <Scene key="signup" component={SignupContainer} hideNavBar/>
     <Scene key="home" component={HomeContainer}/>
     <Scene key="tabbar" tabs tabBarStyle={styles.tabBar}>
       <Scene key="tab1" title="Home" icon={TabIcon} component={TabContainer} hideNavBar/>
