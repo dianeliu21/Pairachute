@@ -51,6 +51,20 @@ export function signup(name, email, password) {
   }
 }
 
+export function switchLoginToSignup() {
+  Actions.signup();
+  return {
+    type: types.SWITCH_LOGIN_SIGNUP
+  }
+}
+
+export function switchSignupToLogin() {
+  Actions.login({direction: 'leftToRight'});
+  return {
+    type: types.SWITCH_LOGIN_SIGNUP
+  }
+}
+
 function loginAttempt() {
   return {
     type: types.LOGIN_ATTEMPT,

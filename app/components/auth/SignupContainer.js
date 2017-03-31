@@ -1,7 +1,7 @@
 // import Signup from './Signup';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { signup } from '../../actions/authActions';
+import { signup, switchSignupToLogin } from '../../actions/authActions';
 
 // Signup component
 import React, { Component } from 'react';
@@ -60,6 +60,10 @@ export class Signup extends Component {
           onPress={() => this.props.signup(this.state.name, this.state.email, this.state.password)}
           title="Sign Up"
         />
+        <Button
+          onPress={() => this.props.switchSignupToLogin()}
+          title="Back to Login"
+        />
       </View>
 
     );
@@ -72,7 +76,7 @@ const mapStateToProps = (state) => {
   }
 }
 const mapDispatchToProps = (dispatch) => {
-  return bindActionCreators({signup}, dispatch);
+  return bindActionCreators({signup, switchSignupToLogin}, dispatch);
 }
 
 const SignupContainer = connect(

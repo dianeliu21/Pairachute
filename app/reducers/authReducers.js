@@ -21,6 +21,12 @@ export function authState(state = {}, action) {
         isAuthenticated: false,
         isPending: false
       })
+    case types.SWITCH_LOGIN_SIGNUP:
+      return Object.assign({}, state, {
+        errorMessage: '',
+        isAuthenticated: false,
+        isPending: false,
+      })
     default:
       return state;
   }
