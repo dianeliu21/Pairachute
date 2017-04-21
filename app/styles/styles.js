@@ -10,7 +10,6 @@ const styles = StyleSheet.create({
     margin: 0,
     padding: 0,
   },
-
   wrapper: {
     flex: 1,
     margin: 0,
@@ -116,7 +115,6 @@ const styles = StyleSheet.create({
     borderColor: 'gray',
     borderWidth: 0.5,
     flexDirection: 'row',
-    marginTop: 10,
     justifyContent: 'space-between'
   },
   messageTextInput: {
@@ -126,6 +124,21 @@ const styles = StyleSheet.create({
     paddingLeft: 10,
     width: 300,
   },
+
+  // Prompts
+  promptContainer: {
+    alignItems: 'center',
+    borderBottomWidth: 1,
+    borderColor: '#d3d3d3',
+    borderTopWidth: 1,
+    margin: 5,
+    padding: 10,
+  },
+  promptHeading: {
+    color: 'grey',
+    fontSize: 10,
+  }
+
 });
 
 module.exports = styles

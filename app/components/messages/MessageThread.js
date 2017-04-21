@@ -11,6 +11,7 @@ import {
 const styles = require('../../styles/styles.js');
 // import InvertibleScrollView from 'react-native-invertible-scroll-view';
 import MessageBubble from './MessageBubble';
+import Prompt from './Prompt';
 
 class MessageThread extends Component {
   constructor(props) {
@@ -55,6 +56,14 @@ class MessageThread extends Component {
     }
   }
 
+  _displayMessage(data) {
+    if (data.sender_id==='prompt') {
+      return(<Prompt data={data}/>)
+    } else {
+      return(<MessageBubble users={this.props.focusedThread.users} sender_id={this.props.user.uid} message={data}/>)
+    }
+  }
+
   _renderFooter() {
     return(
       <TextInput
@@ -85,7 +94,7 @@ class MessageThread extends Component {
             <ListView
               dataSource={this.state.dataSource}
               enableEmptySections={true}
-              renderRow={(data) => <MessageBubble users={this.props.focusedThread.users} sender_id={this.props.user.uid} message={data}/>}
+              renderRow={(data) => this._displayMessage(data)}
               style={{marginTop:100}}
             />
           </ScrollView>
