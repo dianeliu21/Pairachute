@@ -28,7 +28,6 @@ class MessagesListRow extends Component {
 
 
   render() {
-    console.log('message list row data', this.props.thread_info )
     return(
       <TouchableHighlight
         onPress={() => this.props.loadMessages(this.props.thread_info)}

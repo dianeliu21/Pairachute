@@ -4,25 +4,25 @@ import {
   Text,
   View
 } from 'react-native';
-import MessagesList from './MessagesList';
+import ContactsList from './ContactsList';
 const styles = require('../../styles/styles.js');
 
-class MessagesTab extends Component {
+class ContactsTab extends Component {
   constructor(props) {
     super(props);
   }
 
   async componentWillMount() {
-    await this.props.loadThreadList();
+    await this.props.loadContacts();
   }
 
   render() {
     return(
       <View style={styles.messageListContainer}>
-        <MessagesList loadMessages={this.props.loadMessages} dataSource={this.props.threads.threads}/>
+        <ContactsList loadContacts={this.props.loadContacts} dataSource={this.props.contacts? this.props.contacts.contacts : null}/>
       </View>
     );
   }
 }
 
-module.exports = MessagesTab;
+module.exports = ContactsTab;

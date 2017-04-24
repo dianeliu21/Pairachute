@@ -9,8 +9,6 @@ class Tab extends Component {
   }
 
   render() {
-    console.log("HELLO FROM TAB!!!")
-    console.log(this.props)
     return(
       <View style={styles.container}>
         <Text>{this.props.title}</Text>

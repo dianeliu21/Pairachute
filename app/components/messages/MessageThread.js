@@ -9,7 +9,6 @@ import {
   View,
 } from 'react-native';
 const styles = require('../../styles/styles.js');
-// import InvertibleScrollView from 'react-native-invertible-scroll-view';
 import MessageBubble from './MessageBubble';
 import Prompt from './Prompt';
 

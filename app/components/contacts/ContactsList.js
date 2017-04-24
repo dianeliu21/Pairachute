@@ -7,14 +7,14 @@ import {
 } from 'react-native';
 const styles = require('../../styles/styles.js');
 
-import MessagesListRow from './MessagesListRow';
+import ContactsListRow from './ContactsListRow';
 
-class MessagesList extends Component {
+class ContactsList extends Component {
   constructor(props) {
     super(props);
     const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
     this.state = {
-      dataSource: ds.cloneWithRows(this.props.dataSource || []),
+      dataSource: ds.cloneWithRows(this.props.dataSource ? this.props.dataSource : []),
     }
   }
 
@@ -28,14 +28,15 @@ class MessagesList extends Component {
   }
 
   render() {
+    console.log('data source row count', this.state.dataSource.getRowCount())
     return(
         <ListView
           dataSource={this.state.dataSource}
           enableEmptySections={true}
-          renderRow={(data) => <MessagesListRow loadMessages={this.props.loadMessages} thread_info={data}/>}
+          renderRow={(data) => <ContactsListRow loadContacts={this.props.loadContacts} contact_info={data}/>}
         />
     );
   }
 }
 
-module.exports = MessagesList;
+module.exports = ContactsList;
