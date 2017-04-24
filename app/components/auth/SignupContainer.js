@@ -19,8 +19,10 @@ export class Signup extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      name: '',
+      first_name: '',
+      last_name: '',
       email: '',
+      phone_number: '',
       password: '',
       passwordMatch: true,
       behavior: 'padding'
@@ -38,13 +40,23 @@ export class Signup extends Component {
           <Text style={styles.authTitle}>New Account</Text>
           <Text style={styles.authErrorText}>{this.props.authState.errorMessage}</Text>
           <TextInput
-            onChangeText={(name) => this.setState({name})}
-            placeholder="Name"
+            onChangeText={(first_name) => this.setState({first_name})}
+            placeholder="First Name"
+            style={styles.authInput}
+          />
+          <TextInput
+            onChangeText={(last_name) => this.setState({last_name})}
+            placeholder="Last Name"
             style={styles.authInput}
           />
           <TextInput
             onChangeText={(email) => this.setState({email})}
             placeholder="Email Address"
+            style={styles.authInput}
+          />
+          <TextInput
+            onChangeText={(phone_number) => this.setState({phone_number})}
+            placeholder="Phone Number"
             style={styles.authInput}
           />
           <TextInput
@@ -60,7 +72,7 @@ export class Signup extends Component {
             style={[styles.authInput, this.state.passwordMatch ? null : styles.authInputIncorrect]}
           />
           <Button
-            onPress={() => this.props.signup(this.state.name, this.state.email, this.state.password)}
+            onPress={() => this.props.signup(this.state.first_name, this.state.last_name, this.state.email, this.state.phone_number, this.state.password)}
             title="Sign Up"
           />
           <Button

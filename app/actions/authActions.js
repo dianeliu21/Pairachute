@@ -24,30 +24,34 @@ export function login(email, password) {
   }
 }
 
-export function signup(name, email, password) {
-  return function (dispatch) {
-    dispatch(signupAttempt());
-    return fb.auth().createUserWithEmailAndPassword(email, password)
-      .then(function(response) {
-        var user = {
-          displayName: response.displayName,
-          email: response.email,
-          emailVerified: response.emailVerified,
-          providerData: response.providerData,
-          refreshToken: response.refreshToken,
-          uid: response.uid,
-        };
+export function signup(first_name, last_name, email, phone_number, password) {
+  return async function (dispatch) {
+    try {
+      dispatch(signupAttempt())
+      let response = await fb.auth().createUserWithEmailAndPassword(email, password);
+      await response.updateProfile({displayName: first_name + ' ' + last_name});
 
-        // put user info in firebase
-        db.ref('/users/' + response.uid).set({
-          name: name,
-        })
+      var user = {
+        displayName: response.displayName,
+        email: response.email,
+        emailVerified: response.emailVerified,
+        providerData: response.providerData,
+        refreshToken: response.refreshToken,
+        uid: response.uid,
+      }
 
-        dispatch(signupSuccess(user))
-      }).catch(function(error) {
-        console.log(error.message)
-        dispatch(signupFailure(error.message))
-      });
+      await db.ref('/users/' + response.uid).set({
+        first_name: first_name,
+        last_name: last_name,
+        email: email,
+        phone_number: phone_number,
+      })
+
+      dispatch(signupSuccess(user))
+    } catch(error) {
+      console.log(error.message)
+      dispatch(signupFailure(error.message))
+    }
   }
 }
 
