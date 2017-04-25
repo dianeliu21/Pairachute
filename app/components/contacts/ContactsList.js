@@ -33,7 +33,7 @@ class ContactsList extends Component {
         <ListView
           dataSource={this.state.dataSource}
           enableEmptySections={true}
-          renderRow={(data) => <ContactsListRow loadContacts={this.props.loadContacts} contact_info={data}/>}
+          renderRow={(data) => <ContactsListRow loadContactCard={this.props.loadContactCard} contact_info={data}/>}
         />
     );
   }

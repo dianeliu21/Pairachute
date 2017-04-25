@@ -28,9 +28,14 @@ class ContactsListRow extends Component {
 
   render() {
     return(
+      <TouchableHighlight
+        onPress={() => this.props.loadContactCard(this.props.contact_info.uid)}
+        underlayColor={'rgba(0,0,0,0.5)'}
+      >
         <View style={styles.messageListRow}>
           <Text style={styles.messageListRowTitle}>{this.state.first_name} {this.state.last_name}</Text>
         </View>
+      </TouchableHighlight>
     );
   }
 }

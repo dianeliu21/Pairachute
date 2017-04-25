@@ -1,26 +1,25 @@
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { loadContacts, loadContactCard } from '../../actions/contactsActions';
+import { loadContactCard } from '../../actions/contactsActions';
 
-import ContactsTab from './ContactsTab'
+import ContactCard from './ContactCard'
 
 const mapStateToProps = (state) => {
   return {
-    contacts: state.contacts,
     user: state.user,
+    focusedContact: state.focusedContact
   }
 }
 
 const mapDispatchToProps = (dispatch) => {
   return bindActionCreators({
-    loadContacts,
-    loadContactCard,
+    
   }, dispatch);
 }
 
-const ContactsTabContainer = connect(
+const ContactCardContainer = connect(
   mapStateToProps,
   mapDispatchToProps
-)(ContactsTab)
+)(ContactCard)
 
-export default ContactsTabContainer;
+export default ContactCardContainer;

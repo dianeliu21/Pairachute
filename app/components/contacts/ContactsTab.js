@@ -19,7 +19,7 @@ class ContactsTab extends Component {
   render() {
     return(
       <View style={styles.messageListContainer}>
-        <ContactsList loadContacts={this.props.loadContacts} dataSource={this.props.contacts? this.props.contacts.contacts : null}/>
+        <ContactsList loadContactCard={this.props.loadContactCard} dataSource={this.props.contacts? this.props.contacts.contacts : null}/>
       </View>
     );
   }

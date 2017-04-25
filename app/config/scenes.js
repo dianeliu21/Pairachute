@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { Actions, Scene, Switch } from 'react-native-router-flux';
 const styles = require("../styles/styles.js");
 
+import ContactCardContainer from '../components/contacts/ContactCardContainer';
 import ContactsTabContainer from '../components/contacts/ContactsTabContainer';
 import DummyLoginContainer from '../components/auth/DummyLoginContainer';
 import HomeContainer from '../components/home/HomeContainer';
@@ -25,6 +26,7 @@ const scenes = Actions.create(
       <Scene key="tab3" title="Settings" icon={TabIcon} component={TabContainer} hideNavBar/>
     </Scene>
     <Scene key="message" title="Message" component={MessageThreadContainer} hideNavBar={false}/>
+    <Scene key="contactCard" title="Contact" component={ContactCardContainer} hideNavBar={false}/>
   </Scene>
 );
 
