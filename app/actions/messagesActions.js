@@ -4,6 +4,29 @@ import fb from '../config/initializeFirebase';
 
 var db = fb.database();
 
+// Thunk functions
+
+export function loadMessages(thread_info) {
+  return function(dispatch) {
+    try {
+      dispatch(loadMessagesAttempt())
+
+      // get messages for this thread for initial load
+      // var last25MsgRef = db.ref('/messages/' + thread_info.id).limitToLast(8)
+
+      var last25MsgRef = db.ref('/messages/' + thread_info.id)
+      last25MsgRef.on('value', function(snapshot) {
+         var focused_thread = Object.assign({}, thread_info)
+         focused_thread.messages = snapshot.val()
+         dispatch(loadMessagesSuccess(focused_thread))
+      })
+    } catch(err) {
+      console.log(err)
+      dispatch(loadMessagesFailure())
+    }
+  }
+}
+
 export function loadThreadList() {
   return async function(dispatch) {
     try {
@@ -48,27 +71,6 @@ export function loadThreadList() {
   }
 }
 
-export function loadMessages(thread_info) {
-  return function(dispatch) {
-    try {
-      dispatch(loadMessagesAttempt())
-
-      // get messages for this thread for initial load
-      // var last25MsgRef = db.ref('/messages/' + thread_info.id).limitToLast(8)
-
-      var last25MsgRef = db.ref('/messages/' + thread_info.id)
-      last25MsgRef.on('value', function(snapshot) {
-         var focused_thread = Object.assign({}, thread_info)
-         focused_thread.messages = snapshot.val()
-         dispatch(loadMessagesSuccess(focused_thread))
-      })
-    } catch(err) {
-      console.log(err)
-      dispatch(loadMessagesFailure())
-    }
-  }
-}
-
 export function sendMessage(message, sender_id, thread_id) {
   return async function(dispatch) {
     try {
@@ -94,24 +96,7 @@ export function sendMessage(message, sender_id, thread_id) {
   }
 }
 
-function loadThreadListAttempt() {
-  return {
-    type: types.LOAD_THREAD_LIST_ATTEMPT,
-  }
-}
-
-function loadThreadListSuccess(threads) {
-  return {
-    type: types.LOAD_THREAD_LIST_SUCCESS,
-    threads
-  }
-}
-
-function loadThreadListFailure() {
-  return {
-    type: types.LOAD_THREAD_LIST_FAILURE,
-  }
-}
+// Pure Functions
 
 function loadMessagesAttempt() {
   return {
@@ -130,6 +115,25 @@ function loadMessagesSuccess(thread_info) {
 function loadMessagesFailure() {
   return {
     type: types.LOAD_MESSAGES_FAILURE,
+  }
+}
+
+function loadThreadListAttempt() {
+  return {
+    type: types.LOAD_THREAD_LIST_ATTEMPT,
+  }
+}
+
+function loadThreadListSuccess(threads) {
+  return {
+    type: types.LOAD_THREAD_LIST_SUCCESS,
+    threads
+  }
+}
+
+function loadThreadListFailure() {
+  return {
+    type: types.LOAD_THREAD_LIST_FAILURE,
   }
 }
 
