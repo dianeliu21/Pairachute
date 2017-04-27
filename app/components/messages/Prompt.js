@@ -15,7 +15,7 @@ class Prompt extends Component {
     return(
       <View style={styles.promptContainer}>
         <View style={styles.promptHeadingContainer}>
-          <MaterialInitials backgroundColor={'#FC6150'} color={'white'} size={20} text={"Pairachute"}/>
+          <MaterialInitials backgroundColor={'#FC6150'} color={'white'} size={25} text={"Pairachute"}/>
           <Text style={styles.promptHeading}>Pairachute Prompt</Text>
         </View>
         <Text>{this.props.data.message}</Text>
