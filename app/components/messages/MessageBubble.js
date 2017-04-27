@@ -6,6 +6,7 @@ import {
 } from 'react-native';
 import MaterialInitials from 'react-native-material-initials/native';
 const styles = require('../../styles/styles.js');
+import * as constants from '../../styles/constants.js'
 
 class MessageBubble extends Component {
   constructor(props) {
@@ -14,7 +15,7 @@ class MessageBubble extends Component {
 
   _getAvatar() {
     return !this._isOwnMessage() && !this._isSameSenderAsNext()
-      ? (<MaterialInitials backgroundColor={'#bcbcbc'} color={'white'} single={false} size={25} style={styles.messageAvatar} text={this.props.users[this.props.message.sender_id]}/>)
+      ? (<MaterialInitials backgroundColor={constants.mediumGray} color={'white'} single={false} size={constants.messageAvatarSize} style={styles.messageAvatar} text={this.props.users[this.props.message.sender_id]}/>)
       : null
   }
 

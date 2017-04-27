@@ -8,6 +8,7 @@ import {
 import MaterialInitials from 'react-native-material-initials/native';
 import Actions from 'react-native-router-flux';
 const styles = require('../../styles/styles.js');
+import * as constants from '../../styles/constants.js'
 
 class MessagesListRow extends Component {
   constructor(props) {
@@ -34,7 +35,7 @@ class MessagesListRow extends Component {
         underlayColor={'rgba(0,0,0,0.5)'}
       >
         <View style={styles.messageListRow}>
-          <MaterialInitials backgroundColor={'#bcbcbc'} color={'white'} single={false} size={40} text={this.state.title}/>
+          <MaterialInitials backgroundColor={constants.mediumGray} color={'white'} single={false} size={constants.messageListAvatarSize} text={this.state.title}/>
           <View style={styles.messageListTextWrapper}>
             <Text style={styles.messageListRowTitle}>{this.state.title}</Text>
             <Text style={styles.messageListRowPreview}>{this.state.msg_preview}</Text>

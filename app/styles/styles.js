@@ -64,15 +64,16 @@ const styles = StyleSheet.create({
     borderColor: 'gray',
     borderWidth: 0.5,
     flexDirection: 'row',
-    padding: 10,
+    padding: 15,
   },
   messageListRowPreview: {
     color: 'gray',
-    fontSize: 12,
+    fontSize: 14,
   },
   messageListRowTitle: {
     color: 'black',
-    fontSize: 14,
+    fontSize: 16,
+    marginBottom: 2,
   },
   messageListTextWrapper: {
     paddingLeft: 10,
@@ -90,6 +91,7 @@ const styles = StyleSheet.create({
   messageAvatar: {
     marginBottom: 2,
   },
+  messageAvatarSize: 30,
   messageBubble: {
     borderRadius: 10,
     marginTop: 2,
@@ -110,12 +112,13 @@ const styles = StyleSheet.create({
   receivedMessageSender: {
     alignSelf: 'flex-start',
     color: 'gray',
-    fontSize: 10,
+    fontSize: 12,
     marginBottom: 2,
     marginLeft: 40,
   },
   receivedMessageText: {
     color: 'black',
+    fontSize: 16,
   },
   sentMessage: {
     alignSelf: 'flex-end',
@@ -124,20 +127,21 @@ const styles = StyleSheet.create({
   },
   sentMessageText: {
     color: 'white',
+    fontSize: 16,
     textAlign: 'right',
   },
+
+  // Message input
   messageInputView: {
+    alignItems: 'center',
     borderColor: 'gray',
     borderWidth: 0.5,
     flexDirection: 'row',
-    justifyContent: 'space-between'
   },
   messageTextInput: {
-    fontSize: 15,
-    minHeight: 30,
-    padding: 5,
-    paddingLeft: 10,
-    width: 300,
+    fontSize: 16,
+    height: 50,
+    padding: 10,
   },
 
   // Prompts
@@ -151,7 +155,7 @@ const styles = StyleSheet.create({
   },
   promptHeading: {
     color: 'grey',
-    fontSize: 10,
+    fontSize: 14,
     marginLeft: 5,
   },
   promptHeadingContainer: {
