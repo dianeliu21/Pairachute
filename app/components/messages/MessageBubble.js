@@ -12,45 +12,32 @@ class MessageBubble extends Component {
     super(props);
   }
 
-  _getBubble() {
-    if (this._isOwnMessage()) {
-      return (
-        <View style={[styles.messageBubble, styles.sentMessage]}>
-          <Text style={styles.sentMessageText}>{this.props.message.message}</Text>
-        </View>
-      )
-    } else if (!this._isSameSenderAsPrev()) {
-      return (
-        <View style={styles.receivedMsgBubbleWrapperNoAvatar}>
-          <Text style={styles.receivedMessageSender}>{this.props.users[this.props.message.sender_id]}</Text>
-          <View style={[styles.messageBubble, styles.receivedMessage]}>
-            <Text style={styles.receivedMessageText}>{this.props.message.message}</Text>
-          </View>
-        </View>
-      )
-    } else if (!this._isSameSenderAsNext()) {
-      return (
-        <View style={styles.receivedMsgBubbleWrapperWithAvatar}>
-          <MaterialInitials
-            backgroundColor={'red'}
-            color={'white'}
-            size={25}
-            text={this.props.users[this.props.message.sender_id]}
-            single={false}
-          />
-          <View style={[styles.messageBubble, styles.receivedMessage]}>
-            <Text style={styles.receivedMessageText}>{this.props.message.message}</Text>
-          </View>
-        </View>
-      )
-    } else {
-      return (
-        <View style={styles.receivedMsgBubbleWrapperNoAvatar}>
-          <View style={[styles.messageBubble, styles.receivedMessage]}>
-            <Text style={styles.receivedMessageText}>{this.props.message.message}</Text>
-          </View>
-        </View>
-      )
+  _getAvatar() {
+    return !this._isOwnMessage() && !this._isSameSenderAsNext()
+      ? (<MaterialInitials backgroundColor={'#bcbcbc'} color={'white'} single={false} size={25} style={styles.messageAvatar} text={this.props.users[this.props.message.sender_id]}/>)
+      : null
+  }
+
+  _getBubbleStyle() {
+    return this._isOwnMessage() ? styles.sentMessage : styles.receivedMessage
+  }
+
+  _getBubbleTextStyle() {
+    return this._isOwnMessage() ? styles.sentMessageText : styles.receivedMessageText
+  }
+
+  _getSenderName() {
+    return !this._isOwnMessage() && !this._isSameSenderAsPrev()
+     ? (<Text style={styles.receivedMessageSender}>{this.props.users[this.props.message.sender_id]}</Text>)
+     : null
+  }
+
+  _getWrapperStyle() {
+    if (!this._isOwnMessage()) {
+      if (!this._isSameSenderAsNext()) {
+        return styles.receivedMsgBubbleWrapperWithAvatar
+      }
+      return styles.receivedMsgBubbleWrapperNoAvatar
     }
   }
 
@@ -66,32 +53,16 @@ class MessageBubble extends Component {
     return this.props.message.sender_id === this.props.message.prev_sender_id
   }
 
-  //
-  // {
-  //   this._shouldDisplaySenderName()
-  //     ? <Text style={styles.receivedMessageName}>{this._getDisplayName(this.props.message.sender_id)}</Text>
-  //     : null
-  // }
-  // {
-  //   this._shouldDisplayAvatar()
-  //     ? <MaterialInitials
-  //         backgroundColor={'red'}
-  //         color={'white'}
-  //         size={30}
-  //         text={this._getDisplayName(this.props.message.sender_id)}
-  //         single={false}
-  //       />
-  //     : null
-  // }
-  // <View style={[styles.messageBubble, this._getBubbleStyle()]}>
-  //   <Text style={this._getTextStyle()}>{this.props.message.message}</Text>
-  // </View>
-  //
-  //
   render() {
     return(
       <View>
-        {this._getBubble()}
+        {this._getSenderName()}
+        <View style={this._getWrapperStyle()}>
+          {this._getAvatar()}
+          <View style={[styles.messageBubble, this._getBubbleStyle()]}>
+            <Text style={this._getBubbleTextStyle()}>{this.props.message.message}</Text>
+          </View>
+        </View>
       </View>
     );
   }

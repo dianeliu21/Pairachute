@@ -34,7 +34,7 @@ class MessagesListRow extends Component {
         underlayColor={'rgba(0,0,0,0.5)'}
       >
         <View style={styles.messageListRow}>
-          <MaterialInitials backgroundColor={'#cccccc'} color={'white'} single={false} size={40} text={this.state.title}/>
+          <MaterialInitials backgroundColor={'#bcbcbc'} color={'white'} single={false} size={40} text={this.state.title}/>
           <View style={styles.messageListTextWrapper}>
             <Text style={styles.messageListRowTitle}>{this.state.title}</Text>
             <Text style={styles.messageListRowPreview}>{this.state.msg_preview}</Text>
