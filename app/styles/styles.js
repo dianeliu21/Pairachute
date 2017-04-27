@@ -152,8 +152,13 @@ const styles = StyleSheet.create({
   promptHeading: {
     color: 'grey',
     fontSize: 10,
+    marginLeft: 5,
+  },
+  promptHeadingContainer: {
+    alignItems: 'center',
+    flexDirection: 'row',
+    marginBottom: 5,
   }
-
 });
 
 module.exports = styles
