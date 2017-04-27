@@ -5,7 +5,8 @@ import {
   TouchableHighlight,
   View,
 } from 'react-native';
-import { Actions } from 'react-native-router-flux';
+import MaterialInitials from 'react-native-material-initials/native';
+import Actions from 'react-native-router-flux';
 const styles = require('../../styles/styles.js');
 
 class MessagesListRow extends Component {
@@ -26,7 +27,6 @@ class MessagesListRow extends Component {
     }
   }
 
-
   render() {
     return(
       <TouchableHighlight
@@ -34,8 +34,11 @@ class MessagesListRow extends Component {
         underlayColor={'rgba(0,0,0,0.5)'}
       >
         <View style={styles.messageListRow}>
-          <Text style={styles.messageListRowTitle}>{this.state.title}</Text>
-          <Text style={styles.messageListRowPreview}>{this.state.msg_preview}</Text>
+          <MaterialInitials backgroundColor={'#cccccc'} color={'white'} single={false} size={40} text={this.state.title}/>
+          <View style={styles.messageListTextWrapper}>
+            <Text style={styles.messageListRowTitle}>{this.state.title}</Text>
+            <Text style={styles.messageListRowPreview}>{this.state.msg_preview}</Text>
+          </View>
         </View>
       </TouchableHighlight>
     );

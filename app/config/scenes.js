@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { Actions, Scene, Switch } from 'react-native-router-flux';
 const styles = require("../styles/styles.js");
 
+import ComposeMessageContainer from '../components/messages/ComposeMessageContainer';
 import ContactCardContainer from '../components/contacts/ContactCardContainer';
 import ContactsTabContainer from '../components/contacts/ContactsTabContainer';
 import DummyLoginContainer from '../components/auth/DummyLoginContainer';
@@ -22,11 +23,12 @@ const scenes = Actions.create(
     <Scene key="home" component={HomeContainer}/>
     <Scene key="tabbar" tabs tabBarStyle={styles.tabBar}>
       <Scene key="tab1" title="Contacts" icon={TabIcon} component={ContactsTabContainer} renderBackButton={()=> null}/>
-      <Scene key="tab2" title="Messages" icon={TabIcon} component={MessagesTabContainer} initial renderBackButton={()=> null} rightTitle='New Msg' onRight={()=>console.log('new message')}/>
+      <Scene key="tab2" title="Messages" icon={TabIcon} component={MessagesTabContainer} initial renderBackButton={()=> null} rightTitle='New Msg' onRight={()=>Actions.composeMessage()}/>
       <Scene key="tab3" title="Settings" icon={TabIcon} component={TabContainer} hideNavBar/>
     </Scene>
     <Scene key="message" title="Message" component={MessageThreadContainer} hideNavBar={false}/>
     <Scene key="contactCard" title="Contact" component={ContactCardContainer} hideNavBar={false}/>
+    <Scene key="composeMessage" title="New Message" component={ComposeMessageContainer} hideNavBar={false}/>
   </Scene>
 );
 

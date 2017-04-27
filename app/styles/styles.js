@@ -60,8 +60,10 @@ const styles = StyleSheet.create({
     marginTop:60
   },
   messageListRow: {
+    alignItems: 'center',
     borderColor: 'gray',
     borderWidth: 0.5,
+    flexDirection: 'row',
     padding: 10,
   },
   messageListRowPreview: {
@@ -72,16 +74,25 @@ const styles = StyleSheet.create({
     color: 'black',
     fontSize: 14,
   },
+  messageListTextWrapper: {
+    paddingLeft: 10,
+  },
 
   // Message Bubble
-  messageBubbleWrapper: {
+  receivedMsgBubbleWrapperNoAvatar: {
+    marginLeft: 30,
+  },
+  receivedMsgBubbleWrapperWithAvatar: {
+    alignItems: 'flex-start',
+    flexDirection: 'row',
+    marginLeft: 5,
+  },
+  messageBubble: {
+    borderRadius: 10,
     marginTop: 2,
     marginBottom: 2,
     marginRight: 10,
     marginLeft: 10,
-  },
-  messageBubble: {
-    borderRadius: 10,
     paddingTop: 5,
     paddingBottom: 5,
     paddingLeft:10,
@@ -91,8 +102,9 @@ const styles = StyleSheet.create({
     alignSelf: 'flex-start',
     backgroundColor: '#F1F0F0',
     marginRight: 100,
+    marginLeft: 5,
   },
-  receivedMessageName: {
+  receivedMessageSender: {
     alignSelf: 'flex-start',
     color: 'gray',
     fontSize: 10,

@@ -29,9 +29,23 @@ class MessageThread extends Component {
   prepareMessages(messages=this.props.focusedThread.messages) {
     if (messages) {
       prev_sender_id = null
+      prev_message_timestamp = null
+
+      prev_message_key = null
       for (var key in messages) {
         messages[key].prev_sender_id = prev_sender_id
+        messages[key].prev_message_timestamp = prev_message_timestamp
         prev_sender_id = messages[key].sender_id
+        prev_message_timestamp = messages[key].timestamp
+
+        messages[key].next_sender_id = null
+        messages[key].next_message_timestamp = null
+
+        if (prev_message_key) {
+          messages[prev_message_key].next_sender_id = messages[key].sender_id
+          messages[prev_message_key].next_message_timestamp = messages[key].timestamp
+        }
+        prev_message_key = key
       }
       return messages
     } else {
