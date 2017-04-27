@@ -81,17 +81,16 @@ const styles = StyleSheet.create({
 
   // Message Bubble
   receivedMsgBubbleWrapperNoAvatar: {
-    marginLeft: 30,
+    marginLeft: 40,
   },
   receivedMsgBubbleWrapperWithAvatar: {
     alignItems: 'flex-end',
     flexDirection: 'row',
-    marginLeft: 5,
+    marginLeft: 10,
   },
   messageAvatar: {
     marginBottom: 2,
   },
-  messageAvatarSize: 30,
   messageBubble: {
     borderRadius: 10,
     marginTop: 2,
@@ -114,7 +113,7 @@ const styles = StyleSheet.create({
     color: 'gray',
     fontSize: 12,
     marginBottom: 2,
-    marginLeft: 40,
+    marginLeft: 45,
   },
   receivedMessageText: {
     color: 'black',
